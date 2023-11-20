@@ -8,5 +8,5 @@ import {name as appName} from './app.json';
 import ScreenLogin from './src/ScreenLogin';
 import ItemlistNews from './src/ItemlistNews';
 import ListNews from './src/ListNews';
-
-AppRegistry.registerComponent(appName, () => ListNews);
+import NewsDetail from './src/NewsDetail';
+AppRegistry.registerComponent(appName, () => NewsDetail);
