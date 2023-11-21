@@ -9,7 +9,12 @@ import {
 import React from 'react';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-const ScreenLogin = () => {
+const ScreenLogin = props => {
+  const {navigation} = props;
+
+  const dangKy = () => {
+    navigation.navigate('Register');
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Hello</Text>
@@ -51,11 +56,19 @@ const ScreenLogin = () => {
         <Text style={styles.textLogin}>Login</Text>
       </TouchableOpacity>
 
+      <TouchableOpacity onPress={dangKy} style={styles.btnLogin}>
+        <Text style={styles.textLogin}>Register</Text>
+      </TouchableOpacity>
+
       <Text style={[styles.remeber, {textAlign: 'center', marginTop: 15}]}>
         or continute with
       </Text>
 
-      <View style={[styles.remeber, {justifyContent:'space-between', marginTop: 20}]}>
+      <View
+        style={[
+          styles.remeber,
+          {justifyContent: 'space-between', marginTop: 20},
+        ]}>
         <TouchableOpacity style={styles.imageBtnLogin}>
           <Image
             style={styles.imageBtn}
