@@ -5,13 +5,34 @@ import {
   View,
   TouchableOpacity,
   Image,
+  ToastAndroid
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import AxiosIntance from './ultil/AxiosIntance';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ScreenLogin = props => {
   const {navigation} = props;
 
+  const [emailUser, setemailUser] = useState('');
+  const [password, setpassword] = useState('');
+
+  const dangNhap = async () => {
+    try {
+      const response = await AxiosIntance().post('/auth/login', {
+        email: emailUser,
+        password: password,
+      });
+      if (response.error == false) {
+        console.log(response.data.token);
+        await AsyncStorage.setItem('token', response.data.token);
+        ToastAndroid.show('Đăng nhập thành công', ToastAndroid.SHORT);
+      } else ToastAndroid.show('Đăng nhập thât bại', ToastAndroid.SHORT);
+    } catch (error) {
+      console.log(error)
+    }
+  };
   const dangKy = () => {
     navigation.navigate('Register');
   };
@@ -27,12 +48,17 @@ const ScreenLogin = props => {
       <Text style={styles.textUser}>
         Username <Text style={{color: 'red'}}>*</Text>
       </Text>
-      <TextInput style={styles.textInput}></TextInput>
+      <TextInput
+        style={styles.textInput}
+        onChangeText={setemailUser}></TextInput>
 
       <Text style={[styles.textUser, {marginTop: 20}]}>
         Password <Text style={{color: 'red'}}>*</Text>
       </Text>
-      <TextInput style={styles.textInput}></TextInput>
+      <TextInput
+        style={styles.textInput}
+        secureTextEntry={true}
+        onChangeText={setpassword}></TextInput>
 
       <View
         style={[
@@ -52,7 +78,7 @@ const ScreenLogin = props => {
         </Text>
       </View>
 
-      <TouchableOpacity style={styles.btnLogin}>
+      <TouchableOpacity style={styles.btnLogin} onPress={dangNhap}>
         <Text style={styles.textLogin}>Login</Text>
       </TouchableOpacity>
 
