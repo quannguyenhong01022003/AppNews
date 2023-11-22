@@ -4,7 +4,7 @@ import ItemlistNews from './ItemlistNews';
 
 const NewsDetail = () => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Image
         style={styles.imageStyle}
         source={require('./images/imageNews.png')}

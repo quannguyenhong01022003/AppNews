@@ -12,22 +12,19 @@ import NewsDetail from './src/NewsDetail';
 import ScreenRegister from './src/ScreenRegister';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-
-const Stack = createNativeStackNavigator();
+import {NavigationContainer} from '@react-navigation/native';
+import AppNavigation from './src/ultil/AppNavigation';
+import { AppContextProvider } from './src/ultil/AppContext';
 
 
 function myApp() {
-    return (
+  return (
+    <AppContextProvider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Login'>
-          <Stack.Screen name="Login" component={ScreenLogin} />
-          <Stack.Screen name="Register" component={ScreenRegister} />
-        </Stack.Navigator>
+        <AppNavigation/>
       </NavigationContainer>
-    );
-  }
-  
+    </AppContextProvider>
+  );
+}
+
 AppRegistry.registerComponent(appName, () => myApp);

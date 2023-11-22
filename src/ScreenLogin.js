@@ -7,13 +7,15 @@ import {
   Image,
   ToastAndroid
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import AxiosIntance from './ultil/AxiosIntance';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AppContext } from './ultil/AppContext';
 
 const ScreenLogin = props => {
   const {navigation} = props;
+  const {setisLogin} = useContext(AppContext)
 
   const [emailUser, setemailUser] = useState('');
   const [password, setpassword] = useState('');
@@ -28,6 +30,7 @@ const ScreenLogin = props => {
         console.log(response.data.token);
         await AsyncStorage.setItem('token', response.data.token);
         ToastAndroid.show('Đăng nhập thành công', ToastAndroid.SHORT);
+        setisLogin(true)
       } else ToastAndroid.show('Đăng nhập thât bại', ToastAndroid.SHORT);
     } catch (error) {
       console.log(error)
