@@ -7,6 +7,7 @@ import NewsDetail from '../NewsDetail';
 import {AppContext} from './AppContext';
 import ScreenLogin from '../ScreenLogin';
 import ScreenRegister from '../ScreenRegister';
+import ScreenOne from '../ScreenOne';
 
 // Login, Register... => Stack
 const Stack = createNativeStackNavigator();
@@ -21,13 +22,28 @@ const Users = () => {
   );
 };
 
+const News = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName="ListNews">
+      <Stack.Screen name="ListNews" component={ListNews} />
+      <Stack.Screen name="NewsDetail" component={NewsDetail} />
+    </Stack.Navigator>
+  );
+};
+
 // ListNew, NewDetail .. => Tab
 const Tab = createBottomTabNavigator();
 const Main = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown:false}}>
-      <Tab.Screen name="Home" component={ListNews} options={{title: 'Trang chủ'}}/>
-      <Tab.Screen name="Settings" component={NewsDetail} options={{title: 'Cá nhân'}}/>
+    <Tab.Navigator screenOptions={{headerShown: false}}>
+      <Tab.Screen name="Home" component={News} options={{title: 'Trang chủ'}} />
+      <Tab.Screen
+        name="Settings"
+        component={ScreenOne}
+        options={{title: 'Cá nhân'}}
+      />
     </Tab.Navigator>
   );
 };

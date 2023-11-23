@@ -11,7 +11,9 @@ import React, {useState, useEffect} from 'react';
 import ItemlistNews from './ItemlistNews';
 import AxiosIntance from './ultil/AxiosIntance';
 
-const ListNews = () => {
+const ListNews = (props) => {
+  const {navigation} = props
+
   const [data, setdata] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
@@ -41,7 +43,7 @@ const ListNews = () => {
       ) : (
         <FlatList
           data={data}
-          renderItem={({item}) => <ItemlistNews data={item} />}
+          renderItem={({item}) => <ItemlistNews data={item} navigation = {navigation}/>}
           keyExtractor={item => item._id}
           showsVerticalScrollIndicator={false}
         />
