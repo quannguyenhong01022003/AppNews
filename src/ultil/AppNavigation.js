@@ -8,6 +8,7 @@ import {AppContext} from './AppContext';
 import ScreenLogin from '../ScreenLogin';
 import ScreenRegister from '../ScreenRegister';
 import ScreenOne from '../ScreenOne';
+import UpdateNewDetail from '../UpdateNewDetail';
 
 // Login, Register... => Stack
 const Stack = createNativeStackNavigator();
@@ -41,8 +42,8 @@ const Main = () => {
       <Tab.Screen name="Home" component={News} options={{title: 'Trang chủ'}} />
       <Tab.Screen
         name="Settings"
-        component={ScreenOne}
-        options={{title: 'Cá nhân'}}
+        component={UpdateNewDetail}
+        options={{title: 'Đăng tin'}}
       />
     </Tab.Navigator>
   );
